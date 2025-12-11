@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TestTaskForSHIFTCFTBank.Core\TestTaskForSHIFTCFTBank.Core.csproj" />
-    <ProjectReference Include="..\TestTaskForSHIFTCFTBank.DataAccess.Sqlite\TestTaskForSHIFTCFTBank.DataAccess.Sqlite.csproj" />
+    <ProjectReference Include="..\TestTaskForSHIFTCFTBank.DataAccess.Postgres\TestTaskForSHIFTCFTBank.DataAccess.Postgres.csproj" />
   </ItemGroup>
 
 </Project>
