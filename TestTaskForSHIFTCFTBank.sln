@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9 d17.14
+VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskForSHIFTCFTBank", "TestTaskForSHIFTCFTBank\TestTaskForSHIFTCFTBank.csproj", "{5B3FC655-3F2A-43C5-B2BD-7EB592FAB679}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskForSHIFTCFTBank.Core", "TestTaskForSHIFTCFTBank.Core\TestTaskForSHIFTCFTBank.Core.csproj", "{C5B4B3C6-4DC6-452F-842B-F12630F20BB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskForSHIFTCFTBank.DataAccess.Sqlite", "TestTaskForSHIFTCFTBank.DataAccess.Sqlite\TestTaskForSHIFTCFTBank.DataAccess.Sqlite.csproj", "{A6C7DB50-89A2-4B41-8243-23830DE12056}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskForSHIFTCFTBank.DataAccess.Postgres", "TestTaskForSHIFTCFTBank.DataAccess.Postgres\TestTaskForSHIFTCFTBank.DataAccess.Postgres.csproj", "{0E80BBF4-2B70-4BC1-8B91-A08962B71B79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{C5B4B3C6-4DC6-452F-842B-F12630F20BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5B4B3C6-4DC6-452F-842B-F12630F20BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5B4B3C6-4DC6-452F-842B-F12630F20BB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A6C7DB50-89A2-4B41-8243-23830DE12056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6C7DB50-89A2-4B41-8243-23830DE12056}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6C7DB50-89A2-4B41-8243-23830DE12056}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6C7DB50-89A2-4B41-8243-23830DE12056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E80BBF4-2B70-4BC1-8B91-A08962B71B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E80BBF4-2B70-4BC1-8B91-A08962B71B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E80BBF4-2B70-4BC1-8B91-A08962B71B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E80BBF4-2B70-4BC1-8B91-A08962B71B79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
