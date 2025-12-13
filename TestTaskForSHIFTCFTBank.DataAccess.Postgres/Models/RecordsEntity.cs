@@ -7,5 +7,7 @@
         public decimal SUM { get; set; }
         public string ACC_REF { get; set; } = string.Empty;
         public DateOnly OPER_DATE { get; set; }
+
+        public virtual AccountsEntity? AccountsRef { get; set; }
     }
 }

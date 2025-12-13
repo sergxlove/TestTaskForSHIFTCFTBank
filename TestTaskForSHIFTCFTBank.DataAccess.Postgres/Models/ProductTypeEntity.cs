@@ -7,5 +7,8 @@
         public DateOnly BEGIN_DATE { get; set; }
         public DateOnly END_DATE { get; set; }
         public int TARIF_REF { get; set; }
+
+        public virtual TarifsEntity? TarifsRef { get; set; }
+        public virtual List<ProductsEntity> ProductsRef { get; set; } = []; 
     }
 }
