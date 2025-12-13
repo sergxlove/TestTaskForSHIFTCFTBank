@@ -8,7 +8,7 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres
     {
         public BankContext(DbContextOptions<BankContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<AccountsEntity> AccountsTable { get; set; }
