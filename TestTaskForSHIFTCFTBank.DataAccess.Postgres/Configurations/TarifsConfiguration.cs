@@ -9,12 +9,12 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Configurations
         public void Configure(EntityTypeBuilder<TarifsEntity> builder)
         {
             builder.ToTable("tarifs");
-            builder.HasKey(a => a.ID);
-            builder.Property(a => a.NAME)
+            builder.HasKey(a => a.Id);
+            builder.Property(a => a.Name)
                 .HasMaxLength(100);
             builder.HasMany(a => a.ProductTypesRef)
                 .WithOne(a => a.TarifsRef)
-                .HasForeignKey(a => a.TARIF_REF);
+                .HasForeignKey(a => a.Tarif_ref);
         }
     }
 }

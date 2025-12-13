@@ -2,11 +2,11 @@
 {
     public class ProductTypeEntity
     {
-        public int ID { get; set; }
-        public string NAME { get; set; } = string.Empty;
-        public DateOnly BEGIN_DATE { get; set; }
-        public DateOnly END_DATE { get; set; }
-        public int TARIF_REF { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public DateOnly Begin_date { get; set; }
+        public DateOnly End_date { get; set; }
+        public int Tarif_ref { get; set; }
 
         public virtual TarifsEntity? TarifsRef { get; set; }
         public virtual List<ProductsEntity> ProductsRef { get; set; } = []; 

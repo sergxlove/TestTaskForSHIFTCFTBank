@@ -9,10 +9,10 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Configurations
         public void Configure(EntityTypeBuilder<RecordsEntity> builder)
         {
             builder.ToTable("records");
-            builder.HasKey(a => a.ID);
+            builder.HasKey(a => a.Id);
             builder.HasOne(a => a.AccountsRef)
                 .WithMany(a => a.RecordsRef)
-                .HasForeignKey(a => a.ACC_REF);
+                .HasForeignKey(a => a.Acc_ref);
         }
     }
 }

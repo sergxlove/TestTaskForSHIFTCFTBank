@@ -2,13 +2,13 @@
 {
     public class Accounts
     {
-        public int ID { get; set; }
-        public string NAME { get; set; } = string.Empty;
-        public decimal SALDO { get; set; }
-        public int CLIENT_REF { get; set; }
-        public DateOnly OPEN_DATE { get; set; }
-        public DateOnly CLOSE_DATE { get; set; }
-        public int PRODUCT_REF { get; set; }
-        public string ACC_NUM { get; set; } = string.Empty;
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public decimal Saldo { get; set; }
+        public int Client_ref { get; set; }
+        public DateOnly Open_date { get; set; }
+        public DateOnly Close_date { get; set; }
+        public int Product_ref { get; set; }
+        public string Acc_num { get; set; } = string.Empty;
     }
 }

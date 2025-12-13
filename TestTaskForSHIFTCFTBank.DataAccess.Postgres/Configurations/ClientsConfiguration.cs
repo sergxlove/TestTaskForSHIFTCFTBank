@@ -9,21 +9,21 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Configurations
         public void Configure(EntityTypeBuilder<ClientsEntity> builder)
         {
             builder.ToTable("clients");
-            builder.HasKey(a => a.ID);
-            builder.Property(a => a.NAME)
+            builder.HasKey(a => a.Id);
+            builder.Property(a => a.Name)
                 .HasMaxLength(1000);
-            builder.Property(a => a.PLACE_OF_BIRTH)
+            builder.Property(a => a.Place_of_birth)
                 .HasMaxLength(1000);
-            builder.Property(a => a.ADDRESS)
+            builder.Property(a => a.Address)
                 .HasMaxLength(1000);
-            builder.Property(a => a.PASSSPORT)
+            builder.Property(a => a.Passport)
                 .HasMaxLength(100);
             builder.HasMany(a => a.AccountsRef)
                 .WithOne(a => a.ClientsRef)
-                .HasForeignKey(a => a.CLIENT_REF);
+                .HasForeignKey(a => a.Client_ref);
             builder.HasMany(a => a.ProductsRef)
                 .WithOne(a => a.ClientsRef)
-                .HasForeignKey(a => a.CLIENT_REF);
+                .HasForeignKey(a => a.Client_ref);
         }
     }
 }
