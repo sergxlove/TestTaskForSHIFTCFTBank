@@ -1,10 +1,16 @@
-﻿namespace TestTaskForSHIFTCFTBank
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using TestTaskForSHIFTCFTBank.DataAccess.Postgres;
+
+namespace TestTaskForSHIFTCFTBank
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            ServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddDbContext<BankContext>();
+            ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
         }
     }
 }
