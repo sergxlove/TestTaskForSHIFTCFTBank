@@ -10,5 +10,9 @@
         public DateOnly CLOSE_DATE { get; set; }
         public int PRODUCT_REF { get; set; }
         public string ACC_NUM { get; set; } = string.Empty;
+
+        public virtual List<RecordsEntity> RecordsRef { get; set; } = [];
+        public virtual ProductsEntity? ProductsRef { get; set; }
+        public virtual ClientsEntity? ClientsRef { get; set; }
     }
 }

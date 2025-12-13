@@ -8,5 +8,8 @@
         public DateOnly DATE_OF_BIRTH { get; set; }
         public string ADDRESS { get; set; } = string.Empty;
         public string PASSSPORT { get; set; } = string.Empty;
+
+        public virtual List<ProductsEntity> ProductsRef { get; set; } = [];
+        public virtual List<AccountsEntity> AccountsRef { get; set; } = [];
     }
 }

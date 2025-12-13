@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TestTaskForSHIFTCFTBank.DataAccess.Postgres.Configurations;
 using TestTaskForSHIFTCFTBank.DataAccess.Postgres.Models;
 
 namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres
@@ -24,6 +25,12 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new AccountsConfiguration());
+            modelBuilder.ApplyConfiguration(new ClientsConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductsConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new RecordsConfiguration());
+            modelBuilder.ApplyConfiguration(new TarifsConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
