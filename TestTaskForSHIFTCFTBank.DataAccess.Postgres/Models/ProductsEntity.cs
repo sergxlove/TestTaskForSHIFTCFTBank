@@ -7,7 +7,7 @@
         public string Name { get; set; } = string.Empty;
         public int Client_ref { get; set; }
         public DateOnly Open_date { get; set; }
-        public DateOnly Close_date { get; set; }
+        public DateOnly? Close_date { get; set; }
 
         public virtual ProductTypeEntity? ProductsTypeRef { get; set; }
         public virtual ClientsEntity? ClientsRef { get; set; }
