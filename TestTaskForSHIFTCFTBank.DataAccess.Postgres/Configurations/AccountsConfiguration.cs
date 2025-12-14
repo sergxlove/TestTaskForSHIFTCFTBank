@@ -10,10 +10,26 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Configurations
         {
             builder.ToTable("accounts");
             builder.HasKey(a => a.Id);
+
+            builder.Property(a => a.Id)
+                .HasColumnName("id");
             builder.Property(a => a.Name)
-                .HasMaxLength(100);
+                .HasMaxLength(100)
+                .HasColumnName("name");
+            builder.Property(a => a.Saldo)
+                .HasColumnName("saldo");
+            builder.Property(a => a.Client_ref)
+                .HasColumnName("client_ref");
+            builder.Property(a => a.Open_date)
+                .HasColumnName("open_date");
+            builder.Property(a => a.Close_date)
+                .HasColumnName("close_date");
+            builder.Property(a => a.Product_ref)
+                .HasColumnName("product_ref");
             builder.Property(a => a.Acc_num)
-                .HasMaxLength(25);
+                .HasMaxLength(25)
+                .HasColumnName("acc_num");
+
             builder.HasMany(a => a.RecordsRef)
                 .WithOne(a => a.AccountsRef)
                 .HasForeignKey(a => a.Acc_ref);

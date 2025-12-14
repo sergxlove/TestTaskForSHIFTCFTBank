@@ -3,7 +3,7 @@
     public class RecordsEntity
     {
         public int Id { get; set; }
-        public bool Dt { get; set; }
+        public int Dt { get; set; }
         public decimal Sum { get; set; }
         public int Acc_ref { get; set; }
         public DateOnly Oper_date { get; set; }
