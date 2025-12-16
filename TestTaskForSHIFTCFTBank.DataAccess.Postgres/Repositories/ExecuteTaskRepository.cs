@@ -18,5 +18,13 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Repositories
             return await _dapperWorks.ExecuteDapperAsync(_context, FieldTableScripts.FieldAll(),
                 token);
         }
+
+        public async Task<int> DeleteDataAllTableAsync(CancellationToken token)
+        {
+            return await _dapperWorks.ExecuteDapperAsync(_context, DeleteDataTableScripts.FieldAll(),
+                token);
+        }
+
+
     }
 }
