@@ -19,5 +19,46 @@
                 );
                 """;
         }
+
+        public static string ScriptTaskFour()
+        {
+            return """
+                SELECT *
+                FROM accounts
+                JOIN products ON accounts.product_ref = products.id
+                JOIN records ON accounts.id = records.acc_ref
+                WHERE (products.product_type_id = 2 
+                OR products.product_type_id = 3)
+                AND records.dt = 0
+                AND records.oper_date = '2015-06-01'
+                """;
+        }
+
+        public static string ScriptTaskFive()
+        {
+            return """
+                SELECT * 
+                FROM clients
+                JOIN products ON clients.id = products.client_ref
+                JOIN accounts ON clients.id = accounts.client_ref
+                JOIN records ON accounts.id = records.acc_ref
+                WHERE products.product_type_id = 1
+                GROUP BY clients.id, clients.name, clients.place_of_birth, 
+                    clients.date_of_birth, clients.address, clients.passport
+                HAVING 
+                SUM(
+                    CASE 
+                        WHEN records.dt = 1 
+                        THEN records.sum
+                        ELSE 0
+                    END) > 
+                SUM(
+                    CASE 
+                        WHEN records.dt = 0 
+                        THEN records.sum
+                        ELSE 0
+                    END);
+                """;
+        }
     }
 }
