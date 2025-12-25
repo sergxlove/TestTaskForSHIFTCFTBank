@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using TestTaskForSHIFTCFTBank.CommandHandlers;
 using TestTaskForSHIFTCFTBank.DataAccess.Postgres;
 using TestTaskForSHIFTCFTBank.DataAccess.Postgres.Abstractions;
 using TestTaskForSHIFTCFTBank.DataAccess.Postgres.Infrastructures;
@@ -19,7 +20,8 @@ namespace TestTaskForSHIFTCFTBank
             serviceCollection.AddScoped<IExecuteTaskRepository, ExecuteTaskRepository>();
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
             IExecuteTaskRepository rep = serviceProvider.GetService<IExecuteTaskRepository>()!;
-            Console.WriteLine(await rep.FieldAllTableAsync(cts.Token));
+            InterfaceHandler handler = new(rep);
+            await handler.StartExecuteAsync(cts.Token);
         }
     }
 }

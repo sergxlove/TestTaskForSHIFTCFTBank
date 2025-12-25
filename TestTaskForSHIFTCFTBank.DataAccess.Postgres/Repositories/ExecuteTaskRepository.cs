@@ -1,4 +1,6 @@
-﻿using TestTaskForSHIFTCFTBank.DataAccess.Postgres.Abstractions;
+﻿using TestTaskForSHIFTCFTBank.Core.Models;
+using TestTaskForSHIFTCFTBank.DataAccess.Postgres.Abstractions;
+using TestTaskForSHIFTCFTBank.DataAccess.Postgres.Models;
 using TestTaskForSHIFTCFTBank.DataAccess.Postgres.Scripts;
 
 namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Repositories
@@ -21,10 +23,15 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Repositories
 
         public async Task<int> DeleteDataAllTableAsync(CancellationToken token)
         {
-            return await _dapperWorks.ExecuteDapperAsync(_context, DeleteDataTableScripts.FieldAll(),
+            return await _dapperWorks.ExecuteDapperAsync(_context, DeleteDataTableScripts.DeleteAll(),
                 token);
         }
 
+        public async Task<IEnumerable<AccountsEntity>> ExecuteTaskThreeAsync(CancellationToken token)
+        {
+            return await _dapperWorks.QueryDapperAsync<AccountsEntity>
+                (_context, SelectDataScripts.ScriptTaskThree(), token);
+        } 
 
     }
 }
