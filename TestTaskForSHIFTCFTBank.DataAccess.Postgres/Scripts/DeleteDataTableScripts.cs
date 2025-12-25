@@ -44,7 +44,7 @@
                 """;
         }
 
-        public static string FieldAll()
+        public static string DeleteAll()
         {
             return DeleteRecords() + "\n" +
                 DeleteAccounts() + "\n" +
