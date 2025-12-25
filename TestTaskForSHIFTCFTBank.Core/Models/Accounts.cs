@@ -10,5 +10,21 @@
         public DateOnly Close_date { get; set; }
         public int Product_ref { get; set; }
         public string Acc_num { get; set; } = string.Empty;
+
+        public override string ToString()
+        {
+            return $$"""
+                {
+                    {{Id}},
+                    {{Name}},
+                    {{Saldo}},
+                    {{Client_ref}},
+                    {{Open_date}},
+                    {{Close_date}},
+                    {{Product_ref}},
+                    {{Acc_num}}
+                }
+                """;
+        }
     }
 }

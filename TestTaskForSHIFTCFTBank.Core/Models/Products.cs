@@ -8,5 +8,19 @@
         public int Client_ref { get; set; }
         public DateOnly Open_date { get; set; }
         public DateOnly Close_date { get; set; }
+
+        public override string ToString()
+        {
+            return $$"""
+                {
+                    {{Id}},
+                    {{Products_type_id}},
+                    {{Name}},
+                    {{Client_ref}},
+                    {{Open_date}},
+                    {{Close_date}}
+                }
+                """;
+        }
     }
 }
