@@ -7,7 +7,7 @@
         public decimal Saldo { get; set; }
         public int Client_ref { get; set; }
         public DateOnly Open_date { get; set; }
-        public DateOnly Close_date { get; set; }
+        public DateOnly? Close_date { get; set; }
         public int Product_ref { get; set; }
         public string Acc_num { get; set; } = string.Empty;
 
