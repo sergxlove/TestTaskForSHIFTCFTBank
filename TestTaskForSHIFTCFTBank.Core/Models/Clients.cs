@@ -8,5 +8,19 @@
         public DateOnly Date_of_birth { get; set; }
         public string Address { get; set; } = string.Empty;
         public string Passport { get; set; } = string.Empty;
+
+        public override string ToString()
+        {
+            return $$"""
+                {
+                    {{Id}},
+                    {{Name}},
+                    {{Place_of_birth}},
+                    {{Date_of_birth}},
+                    {{Address}},
+                    {{Passport}}
+                }
+                """;
+        }
     }
 }

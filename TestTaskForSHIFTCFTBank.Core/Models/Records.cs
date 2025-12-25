@@ -7,5 +7,16 @@
         public decimal Sum { get; set; }
         public int Acc_ref { get; set; }
         public DateOnly Oper_date { get; set; }
+
+        public override string ToString()
+        {
+            return $$"""
+                    {{Id}},
+                    {{Dt}},
+                    {{Sum}},
+                    {{Acc_ref}},
+                    {{Oper_date}}
+                """;
+        }
     }
 }
