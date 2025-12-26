@@ -100,30 +100,104 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Repositories
         public async Task<int> ExecuteTaskSixAsync(CancellationToken token)
         {
             DbConnection connection = _context.Database.GetDbConnection();
-            using (var transaction = connection.BeginTransaction())
+            using var transaction = connection.BeginTransaction();
+            try
             {
-                try
+                IEnumerable<SaldoResponse> saldoUser = await _dapperWorks.QueryDapperAsync<SaldoResponse>
+                (_context, UpdateDataScripts.ScriptTaskSixPart1(), token);
+                int result = 0;
+                foreach (SaldoResponse s in saldoUser)
                 {
-                    IEnumerable<SaldoResponse> saldoUser = await _dapperWorks.QueryDapperAsync<SaldoResponse>
-                    (_context, UpdateDataScripts.ScriptTaskSixPart1(), token);
-                    int result = 0;
-                    foreach (SaldoResponse s in saldoUser)
+                    if (s.Saldo != s.Current)
                     {
-                        if (s.Saldo != s.Current)
-                        {
-                            result += await _dapperWorks.ExecuteDapperAsync(_context, UpdateDataScripts
-                                .ScriptTaskSixPart2(Convert.ToString(s.Current * 1.01m), s.Id.ToString()),
-                                token);
-                        }
+                        result += await _dapperWorks.ExecuteDapperAsync(_context, UpdateDataScripts
+                            .ScriptTaskSixPart2(Convert.ToString(s.Current * 1.01m), s.Id.ToString()),
+                            token);
                     }
-                    transaction.Commit();
-                    return result;
                 }
-                catch 
+                transaction.Commit();
+                return result;
+            }
+            catch
+            {
+                transaction.Rollback();
+                return 0;
+            }
+        }
+
+        public async Task<List<ProductResponse>> ExecuteTaskSevenAsync(CancellationToken token)
+        {
+            IEnumerable<ProductResponse> result = await _dapperWorks.QueryDapperAsync<ProductResponse>
+                (_context, SelectDataScripts.ScriptTaskSeven(), token);
+            List<ProductResponse> resultList = new(result);
+            return resultList;
+        }
+
+        public async Task<int> ExecuteTaskEightAsync(CancellationToken token)
+        {
+            DbConnection connection = _context.Database.GetDbConnection();
+            using var transaction = connection.BeginTransaction();
+            try
+            {
+                IEnumerable<int> idProducts = await _dapperWorks.QueryDapperAsync<int>(_context,
+                    UpdateDataScripts.ScriptTaskEightPart1(), token);
+                int result = 0;
+                DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
+                string dateString = currentDate.Year + "-" + currentDate.Month + "-" + currentDate.Day;
+                foreach(int p  in idProducts)
                 {
-                    transaction.Rollback();
-                    return 0;
+                    result += await _dapperWorks.ExecuteDapperAsync(_context, 
+                        UpdateDataScripts.ScriptTaskEightPart2(currentDate.ToString(), p.ToString()), 
+                        token);
                 }
+                transaction.Commit();
+                return result;
+            }
+            catch
+            {
+                transaction.Rollback();
+                return 0;
+            }
+        }
+
+        public async Task<int> ExecuteTaskNineAsync(CancellationToken token)
+        {
+            DbConnection connection = _context.Database.GetDbConnection();
+            using var transaction = connection.BeginTransaction();
+            try
+            {
+                IEnumerable<ClientCountResponse> clientsId = await _dapperWorks
+                    .QueryDapperAsync<ClientCountResponse>
+                    (_context, UpdateDataScripts.ScriptTaskNinePart1(), token);
+                DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
+                string dateString = currentDate.Year + "-" + currentDate.Month + "-" + currentDate.Day;
+                int result = 0;
+                int middleResult = 0;
+                decimal newSaldo;
+                IEnumerable<ClientAccResponse> idFirstAcc;
+                IEnumerable<ClientAccResponse> idSecondAcc;
+                foreach(ClientCountResponse c in clientsId)
+                {
+                    idFirstAcc = await _dapperWorks.QueryDapperAsync<ClientAccResponse>(_context,
+                        UpdateDataScripts.ScriptTaskNinePart2(c.Id.ToString()), token);
+                    idSecondAcc = await _dapperWorks.QueryDapperAsync<ClientAccResponse>(_context,
+                        UpdateDataScripts.ScriptTaskNinePart3(c.Id.ToString()), token);
+                    newSaldo = idFirstAcc.ElementAt(0).Saldo + idSecondAcc.ElementAt(0).Saldo;
+                    middleResult = await _dapperWorks.ExecuteDapperAsync(_context,
+                        UpdateDataScripts.ScriptTaskNinePart4(idSecondAcc.ElementAt(0).Id.ToString(),
+                        newSaldo.ToString()), token);
+                    if (middleResult == 0) throw new Exception();
+                    result += await _dapperWorks.ExecuteDapperAsync(_context,
+                        UpdateDataScripts.ScriptTaskNinePart5(idFirstAcc.ElementAt(0).Id.ToString(),
+                        dateString), token);
+                }
+                transaction.Commit();
+                return result;
+            }
+            catch
+            {
+                transaction.Rollback();
+                return 0;
             }
         }
     }
