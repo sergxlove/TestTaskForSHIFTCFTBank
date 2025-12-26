@@ -125,5 +125,39 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Scripts
                 WHERE accounts.id = {idAcc};
                 """;
         }
+
+        public static string ScriptsTaskTenPart1()
+        {
+            return """
+                ALTER TABLE products ADD COLUMN contract_sum NUMERIC(19,2);
+                """;
+        }
+
+        public static string ScriptsTaskTenPart2()
+        {
+            return """
+                UPDATE products 
+                SET contract_sum = (
+                    SELECT MIN(records.sum)
+                    FROM accounts
+                    JOIN records ON accounts.id = records.acc_ref
+                    WHERE records.dt = 1 )
+                WHERE products.product_type_id = 1;
+                """;
+        }
+
+        public static string ScriptsTaskTenPart3() 
+        {
+            return """
+                UPDATE products
+                SET contract_sum = (
+                    SELECT AVG(records.sum)
+                    FROM accounts
+                    JOIN records ON accounts.id = records.acc_ref
+                    WHERE records.dt = 0 )
+                WHERE products.product_type_id = 2 
+                OR products.product_type_id = 3;
+                """;
+        }
     }
 }
