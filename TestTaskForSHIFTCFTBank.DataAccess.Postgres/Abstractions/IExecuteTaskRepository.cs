@@ -13,6 +13,7 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Abstractions
         Task<List<ProductResponse>> ExecuteTaskSevenAsync(CancellationToken token);
         Task<int> ExecuteTaskEightAsync(CancellationToken token);
         Task<int> ExecuteTaskNineAsync(CancellationToken token);
+        Task<int> ExecuteTaskTenAsync(CancellationToken token);
 
     }
 }

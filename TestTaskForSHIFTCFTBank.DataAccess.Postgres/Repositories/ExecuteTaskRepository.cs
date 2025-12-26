@@ -200,5 +200,28 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Repositories
                 return 0;
             }
         }
+
+        public async Task<int> ExecuteTaskTenAsync(CancellationToken token)
+        {
+            DbConnection connection = _context.Database.GetDbConnection();
+            using var transaction = connection.BeginTransaction();
+            try
+            {
+                int result = 0;
+                await _dapperWorks.ExecuteDapperAsync(_context, UpdateDataScripts.ScriptsTaskTenPart1(),
+                    token);
+                result += await _dapperWorks.ExecuteDapperAsync(_context, 
+                    UpdateDataScripts.ScriptsTaskTenPart2(), token);
+                result += await _dapperWorks.ExecuteDapperAsync(_context,
+                    UpdateDataScripts.ScriptsTaskTenPart3(), token);
+                transaction.Commit();
+                return result;
+            }
+            catch
+            {
+                transaction.Rollback();
+                return 0;
+            }
+        }
     }
 }

@@ -75,6 +75,8 @@ namespace TestTaskForSHIFTCFTBank.CommandHandlers
                         break;
                     case "10":
                     case "taskTen":
+                        result = await _repository.ExecuteTaskTenAsync(token);
+                        Console.WriteLine($"Строк затронуло: {result}");
                         break;
                     case "exit":
                         isExit = true;
