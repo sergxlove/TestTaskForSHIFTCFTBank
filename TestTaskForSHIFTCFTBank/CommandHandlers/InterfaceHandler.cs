@@ -1,5 +1,6 @@
 ﻿using TestTaskForSHIFTCFTBank.Core.Models;
 using TestTaskForSHIFTCFTBank.DataAccess.Postgres.Abstractions;
+using TestTaskForSHIFTCFTBank.DataAccess.Postgres.Responses;
 
 namespace TestTaskForSHIFTCFTBank.CommandHandlers
 {
@@ -57,12 +58,20 @@ namespace TestTaskForSHIFTCFTBank.CommandHandlers
                         break;
                     case "7":
                     case "taskSeven":
+                        foreach(ProductResponse p in await _repository.ExecuteTaskSevenAsync(token))
+                        {
+                            Console.WriteLine(p);
+                        }
                         break;
                     case "8":
                     case "taskEight":
+                        result = await _repository.ExecuteTaskEightAsync(token);
+                        Console.WriteLine($"Строк затронуло: {result}");
                         break;
                     case "9":
                     case "taskNine":
+                        result = await _repository.ExecuteTaskNineAsync(token);
+                        Console.WriteLine($"Строк затронуло: {result}");
                         break;
                     case "10":
                     case "taskTen":

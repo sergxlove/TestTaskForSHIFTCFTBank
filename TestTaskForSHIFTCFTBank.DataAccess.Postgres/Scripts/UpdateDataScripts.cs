@@ -1,4 +1,6 @@
-﻿namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Scripts
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
+namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Scripts
 {
     public class UpdateDataScripts
     {
@@ -28,6 +30,99 @@
                 UPDATE accounts
                 SET accounts.saldo = {newSaldo}
                 WHERE accounts.id = {id};
+                """;
+        }
+
+        public static string ScriptTaskEightPart1()
+        {
+            return """
+                SELECT products.id
+                FROM products
+                JOIN accounts ON products.id = accounts.product_ref
+                JOIN records ON accounts.id = records.acc_ref
+                WHERE accounts.saldo = 0 
+                AND products.product_type_id = 1
+                AND products.close_date IS NULL
+                GROUP BY products.id
+                HAVING
+                SUM(CASE 
+                        WHEN r.dt = 1 
+                        THEN r.sum 
+                        ELSE 0 
+                    END) =
+                SUM(CASE 
+                        WHEN r.dt = 0 
+                        THEN r.sum 
+                        ELSE 0 
+                    END);
+                """;
+        }
+
+        public static string ScriptTaskEightPart2(string date, string id)
+        {
+            return $"""
+                UPDATE products
+                SET products.close_date = {date}
+                WHERE products.id = {id};
+                """;
+        }
+
+        public static string ScriptTaskNinePart1()
+        {
+            return """
+                SELECT clients.id,
+                COUNT(accounts.id) as count_acc
+                FROM clients
+                JOIN accounts ON clients.id = accounts.client_ref
+                JOIN products ON accounts.product_ref = products.id
+                WHERE products.product_type_id = 3
+                AND accounts.saldo > 0
+                GROUP BY clients.id
+                HAVING count_acc > 20;
+                """;
+        }
+
+        public static string ScriptTaskNinePart2(string id)
+        {
+            return $"""
+                SELECT accounts.id,
+                accounts.saldo
+                FROM accounts
+                WHERE accounts.client_ref = {id}
+                ORDER BY accounts.open_date 
+                LIMIT 1;
+                """;
+        }
+
+        public static string ScriptTaskNinePart3(string id)
+        {
+            return $"""
+                SELECT accounts.id,
+                accounts.saldo
+                FROM accounts
+                WHERE accounts.client_ref = {id}
+                ORDER BY accounts.open_date 
+                SKIP 1
+                LIMIT 1;
+                """;
+        }
+
+        public static string ScriptTaskNinePart4(string idAcc, string newSaldo)
+        {
+            return $"""
+                UPDATE accounts
+                SET accounts.saldo = {newSaldo}
+                WHERE accounts.id = {idAcc};
+                """;
+        }
+
+        public static string ScriptTaskNinePart5(string idAcc, string date)
+        {
+            return $"""
+                UPDATE accounts
+                SET accounts.saldo = 0
+                accounts.close_date = {date}
+                WHERE accounts.id = {idAcc};
                 """;
         }
     }

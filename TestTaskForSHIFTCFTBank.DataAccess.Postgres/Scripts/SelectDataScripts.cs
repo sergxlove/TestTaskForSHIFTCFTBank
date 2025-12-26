@@ -60,5 +60,50 @@
                     END);
                 """;
         }
+
+        public static string ScriptTaskSeven()
+        {
+            return """
+                SELECT products.name,
+                MAX(CASE 
+                        WHEN records.dt = 1
+                        THEN records.sum
+                        ELSE 0
+                    END
+                ) as sum_credit,
+                COUNT(CASE
+                        WHEN records.dt = 0
+                        THEN 1
+                    END
+                ) as count_operation
+                FROM products
+                JOIN accounts ON products.id = accounts.product_ref
+                JOIN records ON accounts.id = records.acc_ref
+                WHERE products.product_type_id = 1 
+                AND products.close_date IS NULL
+                AND accounts.saldo = 0
+                AND EXISTS (
+                    SELECT 1 
+                    FROM records 
+                    WHERE records.acc_ref = accounts.id
+                    AND records.dt = 1)
+                AND EXISTS (
+                    SELECT 1 
+                    FROM records 
+                    WHERE records.acc_ref = accounts.id
+                    AND records.dt = 0)
+                GROUP BY products.id, products.name
+                HAVING SUM(CASE 
+                            WHEN records.dt = 1 
+                            THEN records.sum 
+                            ELSE 0 
+                          END) =
+                SUM(CASE 
+                        WHEN records.dt = 0 
+                        THEN records.sum 
+                        ELSE 0 
+                   END);
+                """;
+        }
     }
 }
