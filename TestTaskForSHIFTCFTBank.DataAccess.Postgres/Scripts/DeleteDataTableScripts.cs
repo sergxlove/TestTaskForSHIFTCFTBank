@@ -5,42 +5,42 @@
         public static string DeleteTarifs()
         {
             return """
-                DELETE * FROM tarifs;
+                DELETE FROM tarifs;
                 """;
         }
 
         public static string DeleteProductType()
         {
             return """
-                DELETE * FROM productype;
+                DELETE FROM productype;
                 """;
         }
 
         public static string DeleteClients()
         {
             return """
-                DELETE * FROM clients;
+                DELETE FROM clients;
                 """;
         }
 
         public static string DeleteProducts()
         {
             return """
-                DELETE * FROM products;
+                DELETE FROM products;
                 """;
         }
 
         public static string DeleteAccounts()
         {
             return """
-                DELETE * FROM accounts;
+                DELETE FROM accounts;
                 """;
         }
 
         public static string DeleteRecords()
         {
             return """
-                DELETE * FROM records;
+                DELETE FROM records;
                 """;
         }
 

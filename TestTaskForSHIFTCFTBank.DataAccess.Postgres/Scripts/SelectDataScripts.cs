@@ -37,7 +37,8 @@
         public static string ScriptTaskFive()
         {
             return """
-                SELECT * 
+                SELECT clients.id, clients.name, clients.place_of_birth, 
+                    CAST(clients.date_of_birth AS DATE), clients.address, clients.passport
                 FROM clients
                 JOIN products ON clients.id = products.client_ref
                 JOIN accounts ON clients.id = accounts.client_ref
