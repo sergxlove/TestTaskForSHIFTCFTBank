@@ -12,9 +12,9 @@
                 AND products.close_date IS NULL 
                 AND accounts.close_date IS NULL
                 AND accounts.client_ref IN (
-                    SELECT accounts.client_ref
-                    FROM accounts
-                    GROUP BY accounts.client_ref
+                    SELECT products.client_ref
+                    FROM products
+                    GROUP BY products.client_ref
                     HAVING COUNT(*) > 1
                 );
                 """;
@@ -38,7 +38,7 @@
         {
             return """
                 SELECT clients.id, clients.name, clients.place_of_birth, 
-                    CAST(clients.date_of_birth AS DATE), clients.address, clients.passport
+                    DATE(clients.date_of_birth) AS date_of_birth, clients.address, clients.passport
                 FROM clients
                 JOIN products ON clients.id = products.client_ref
                 JOIN accounts ON clients.id = accounts.client_ref

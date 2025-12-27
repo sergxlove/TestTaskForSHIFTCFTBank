@@ -88,7 +88,7 @@ namespace TestTaskForSHIFTCFTBank.DataAccess.Postgres.Repositories
                     Id = c.Id,
                     Name = c.Name,
                     Address = c.Address,
-                    Date_of_birth = c.Date_of_birth,
+                    Date_of_birth = DateOnly.FromDateTime(c.Date_of_birth),
                     Place_of_birth = c.Place_of_birth,
                     Passport = c.Passport
                 };
